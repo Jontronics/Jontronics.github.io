@@ -1,8 +1,146 @@
-<h1>hellow world</h1>
+<!doctype html>
+<html>
+
+<head>
+  <title>Random Student Picker</title>
+  <script src="rand.js"></script>
+  <link href="rand.css" type="text/css" rel="stylesheet">
+  <meta name="viewport" content="width=600">
+</head>
+
+<body id="body">
+    
+ 
+  <h1 id="header">This is jonTronic's fancy student picker</h1>
+    
+<div class="container">   
+  <h3 id="choice" class="cap">  &nbsp; </h3>
+     <button id="pickButton">PICK</button>  
+</div>     
+    
+  <img src="yoda.jpg" id="image">
+  <h3 id="attendance">Attendance</h3>
+  <ul id=aList></ul>
+    
+</body>
+    
+<script>
+    
+    
+    
+var pickButton;
+var pairButton;
+var header;
+var body;
+var choice;
+var aList;
+
+var students = [
+  "Kevin",
+  "Jonathan",
+  "Angel",
+  "Eric",
+  "Janette",
+  "Desmond",
+  "Ashiya",
+  "Monica",
+  "Susana",
+  "Deborah",
+  "Thomas",
+  "Julissa",
+  "Kyla",
+  "John",
+  "Shonica",
+  "Krystal"
+];
+
+var colors = [
+  'orange', 4,    
+  'hotpink',
+  '#FECC00',
+  'green', 0,
+  'lightblue', 0,
+  'black'
+  
+];
+var cur = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('hello rand.js');
+
+  body = document.getElementById('body');
+  header = document.getElementById('header');
+  pickButton = document.getElementById('pickButton');
+  pairButton = document.getElementById('pairButton');
+  choice = document.getElementById('choice');
+  aList = document.getElementById('aList');
+  
+  pickButton.addEventListener('click', pickOnClick );
+  pairButton.addEventListener('click', pairOnClick ) ;
+  aList.addEventListener('click', aListOnClick );
+
+ // build the attendance list
+  for (let i=0; i<students.length; i++) {
+    let li = document.createElement('li');
+    li.innerText = students[i];
+    aList.append(li);
+  }
+});
+var pickOnClick = function (event) {
+  choice.innerHTML = '&nbsp;'
+  var rand = students.splice(Math.floor(Math.random() * students.length - 1),1);
+  var x = window.setInterval(() => {
+    if (colors[cur] === undefined) {
+      window.clearInterval(x);
+      cur = 0;
+      if ( rand[0].length % 2 === 0 ) {
+        rand[0] = rand[0] + '!';
+        choice.innerText = rand[0].toUpperCase();
+          
+      } else {
+        choice.innerText = rand[0].toUpperCase();
+      }
+       return;
+    }
+    if (colors[cur]) header.style.color = colors[cur];
+    if (colors[cur-1]) body.style.backgroundColor = colors[cur-4];
+    cur += 1;
+  }, 200);
+}
+
+var pairOnClick = function (event) {
+  choice.innerHTML = '&nbsp;'
+  var rand = students.splice(Math.floor(Math.random() * students.length - 1),1);
+  var rand1 = students.splice(Math.floor(Math.random() * students.length - 1),1);
+  var x = window.setInterval(() => {
+    if (colors[cur] === undefined) {
+      window.clearInterval(x);
+      cur = 0;
+      if ( rand[0].length % 2 === 0 ) {
+        rand[0] = rand[0] + '!';
+        choice.innerText = rand + ' & ' + rand1;
+      } else {
+        choice.innerText = rand;
+      }
+       return;
+    }
+    if (colors[cur]) header.style.color = colors[cur];
+    if (colors[cur-1]) body.style.backgroundColor = colors[cur-1];
+    cur += 1;
+  }, 200);
+}
+var aListOnClick = function (event) {
+  if (event.target.tagName === 'LI') {
+    event.target.style.textDecoration = 'line-through';
+  }
+}
 
 
 
+    
+</script>    
+    
+    
+    
 
-Jonathan
-
-
+</html>
